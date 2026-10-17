@@ -1,0 +1,187 @@
+/* ==============================
+   全域設定
+   ============================== */
+
+/* 讓 width 包含 padding 和 border,100% 才會真的是 100%
+   (不加的話 input 會比外框寬,線就會爆出去) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f4f4f4; /* 淺灰底,讓白色卡片浮出來 */
+}
+
+/* ==============================
+   Header 導覽列(手機版)
+   ============================== */
+
+/* 橫向排列 ☰、logo、右側 icon,並且上下置中 */
+.header__inner {
+  display: flex; /* 子元素由左到右排成一排 */
+  align-items: center; /* 垂直置中 */
+  height: 60px;
+  padding: 0 16px; /* 上下 0、左右 16px */
+}
+
+/* 限制 logo 高度,寬度會自動等比例縮放 */
+.logo img {
+  height: 32px;
+}
+
+/* 漢堡按鈕:清掉瀏覽器預設的灰底和邊框 */
+.header__burger {
+  background: none;
+  border: none;
+  font-size: 24px; /* icon 是文字字型,用 font-size 控制大小 */
+  margin-right: 16px; /* 和右邊的 logo 拉開距離 */
+  cursor: pointer; /* 滑鼠移上去變手指 */
+}
+
+/* 右側 4 個 icon */
+.header__right {
+  margin-left: auto; /* 吃掉左邊所有空白,把自己推到最右邊 */
+  display: flex; /* 4 個 icon 橫排 */
+  gap: 16px; /* icon 之間的間距 */
+}
+
+/* ==============================
+   Banner
+   ============================== */
+
+.banner img {
+  width: 100%; /* 左右撐滿 */
+  height: 200px;
+  object-fit: cover; /* 填滿框、不變形,多的部分裁掉 */
+}
+
+/* ==============================
+   訂票卡片
+   ============================== */
+
+.search-card {
+  background-color: #fff;
+  padding: 16px; /* 卡片內側留白 */
+  border-radius: 8px; /* 圓角 */
+  margin: 0 16px; /* 左右留白,卡片不貼邊 */
+  min-height: 200px; /* 最小高度(之後內容撐開後可以拿掉) */
+}
+
+/* ==============================
+   分頁(航班 / 樂虎卡 / 虎加酒 / 虎里轉)
+   ============================== */
+
+.tabs {
+  display: flex; /* 4 個分頁橫排 */
+  gap: 20px;
+}
+
+/* 每個分頁:icon 和文字並排、去掉底線 */
+.tabs a {
+  display: flex;
+  align-items: center; /* icon 和文字垂直置中 */
+  gap: 4px; /* icon 和文字的距離 */
+  text-decoration: none; /* 去掉連結底線 */
+  color: #827d7d; /* 未選中:灰色 */
+  padding-bottom: 8px; /* 讓底線和文字有距離 */
+}
+
+/* 方法二:用 ::after 偽元素畫底線(目前註解起來,拿來比較)
+.tabs__item--active {
+  position: relative;      // 讓 ::after 以它為定位參考
+}
+.tabs__item--active::after {
+  content: "";             // 偽元素一定要有 content
+  position: absolute;      // 相對於上面的 relative 定位
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: #ed7f01;
+}
+*/
+
+/* 選中的分頁:深色文字 + 橘色底線
+   寫成 .tabs a.tabs__item--active 是為了提高權重(0-2-1),
+   才能贏過上面的 .tabs a(0-1-1) */
+.tabs a.tabs__item--active {
+  color: #211e21;
+  border-bottom: 2px solid coral;
+}
+
+/* ==============================
+   來回 / 單程 下拉選單
+   ============================== */
+
+.trip-type {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #fff; /* 明確指定白底,避免各瀏覽器預設不同 */
+  margin-top: 16px; /* 和上面的分頁拉開距離 */
+}
+
+/* ==============================
+   出發地 / 目的地(上下相連的一個大框)
+   ============================== */
+
+/* 外框由 .route 負責,裡面的 input 不畫自己的框 */
+.route {
+  margin-top: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden; /* 裁掉 input 戳出來的方形角,圓角才看得到 */
+}
+
+.route__input {
+  display: block; /* 一個一個往下排,下方不會有縫隙 */
+  border: none; /* 去掉自己的邊框 */
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+/* 只在第一個 input 下面畫分隔線 */
+.route__input:first-child {
+  border-bottom: 1px solid #ccc;
+}
+
+/* ==============================
+   日期欄位(跟 .route 同樣的概念)
+   ============================== */
+
+.dates {
+  margin-top: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* label 預設是行內元素,改成 block 才會一格一行 */
+.dates__item {
+  display: block;
+  padding: 8px 16px;
+}
+
+/* 小字標題:獨佔一行,日期在它下面 */
+.dates__label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}
+
+.dates__input {
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  padding: 0;
+}
+
+/* 第一格下面畫分隔線 */
+.dates__item:first-child {
+  border-bottom: 1px solid #ccc;
+}

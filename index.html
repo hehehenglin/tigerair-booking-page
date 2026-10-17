@@ -1,0 +1,109 @@
+<!doctype html>
+<!-- lang 告訴瀏覽器/螢幕閱讀器這頁的語言;中文頁面建議改成 zh-Hant -->
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 手機版能正常縮放的關鍵,一定要有 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台灣虎航</title>
+
+    <!-- CSS 載入順序很重要:後面的可以覆蓋前面的 -->
+    <link rel="stylesheet" href="reset.css" />
+    <!-- Iconoir icon 套件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css"
+    />
+    <!-- 自己的樣式放最後 -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== 頁首 ===== -->
+    <header class="header">
+      <div class="header__inner">
+        <!-- 桌面版文字選單的位置,手機版先空著 -->
+        <nav class="nav"></nav>
+
+        <!-- 漢堡按鈕:只有 icon,所以要 aria-label 讓螢幕閱讀器知道用途 -->
+        <button class="header__burger" type="button" aria-label="開啟選單">
+          <i class="iconoir-menu"></i>
+        </button>
+
+        <!-- logo 只包住圖片,點了回首頁 -->
+        <a href="index.html" class="logo">
+          <img src="zh-TW-DYtL0a4x.svg" alt="tigerairtw-logo" />
+        </a>
+
+        <!-- 右側 4 個 icon,和 logo 是並排(兄弟)關係,不要放進 logo 裡面 -->
+        <div class="header__right">
+          <a href="#" aria-label="航班搜尋"><i class="iconoir-search"></i></a>
+          <a href="#" aria-label="登入/註冊"><i class="iconoir-user"></i></a>
+          <a href="#" aria-label="語言"><i class="iconoir-globe"></i></a>
+          <a href="#" aria-label="幣別"
+            ><i class="iconoir-dollar-circle"></i
+          ></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== 主要內容 ===== -->
+    <main>
+      <!-- 橫幅 -->
+      <section class="banner">
+        <img src="banner.jpg" alt="手機板banner.jpg" />
+      </section>
+
+      <!-- 訂票卡片 -->
+      <section class="search-card">
+        <!-- 分頁:icon 和文字包在同一個 <a> 裡,一起被選中 -->
+        <div class="tabs">
+          <a href="#" class="tabs__item--active"
+            ><i class="iconoir-airplane"></i>航班</a
+          ><a href="#"><i class="iconoir-credit-card"></i>樂虎卡</a
+          ><a href="#">虎加酒</a><a href="#">虎里轉</a>
+        </div>
+
+        <!-- 行程類型下拉選單:value 是程式拿到的值,文字是使用者看到的 -->
+        <select class="trip-type" name="trip-type" id="trip-type">
+          <option value="round">來回</option>
+          <option value="oneway">單程</option>
+        </select>
+
+        <!-- 出發地 / 目的地:用 div 包起來,CSS 才能把兩格做成一個大框 -->
+        <div class="route">
+          <!-- input 是單標籤;placeholder 是沒輸入時的淡灰提示字 -->
+          <input
+            class="route__input"
+            type="text"
+            name="origin"
+            placeholder="出發地"
+          />
+          <input
+            class="route__input"
+            type="text"
+            name="destination"
+            placeholder="目的地"
+          />
+        </div>
+
+        <!-- 日期欄位:label 把標題和 input 包在一起,
+             點標題就會選到 input,所以不需要 for / id -->
+        <div class="dates">
+          <label class="dates__item">
+            <!-- 欄位小標題用 span(行內),不用 p(label 裡不能放 p) -->
+            <span class="dates__label">去程出發日期</span>
+            <!-- type="date" 瀏覽器會自動提供日曆選擇器 -->
+            <input class="dates__input" type="date" name="depart-date" />
+          </label>
+          <label class="dates__item">
+            <span class="dates__label">回程出發日期</span>
+            <input class="dates__input" type="date" name="return-date" />
+          </label>
+        </div>
+      </section>
+
+      <!-- 快捷功能(下一步才做) -->
+      <section class="shortcuts"></section>
+    </main>
+  </body>
+</html>
