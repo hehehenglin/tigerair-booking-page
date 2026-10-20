@@ -1,6 +1,6 @@
-/* ==============================
-   全域設定
-   ============================== */
+/* =====================================================
+   0. 全域設定
+   ===================================================== */
 
 /* 讓 width 包含 padding 和 border,100% 才會真的是 100%
    (不加的話 input 會比外框寬,線就會爆出去) */
@@ -14,21 +14,25 @@ body {
   background: #f4f4f4; /* 淺灰底,讓白色卡片浮出來 */
 }
 
-/* ==============================
-   Header 導覽列(手機版)
-   ============================== */
+/* =====================================================
+   1. 手機版樣式(預設,寫在前面)
+   桌面版放在最下面的 @media 裡,才能覆蓋這裡
+   ===================================================== */
 
-/* 橫向排列 ☰、logo、右側 icon,並且上下置中 */
+/* ---------- 1-1. Header ---------- */
+
+/* 外層:撐滿整個視窗寬度的白底 */
+.header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+/* 內層:橫排 ☰、logo、右側 icon */
 .header__inner {
   display: flex; /* 子元素由左到右排成一排 */
   align-items: center; /* 垂直置中 */
   height: 60px;
   padding: 0 16px; /* 上下 0、左右 16px */
-}
-
-/* 限制 logo 高度,寬度會自動等比例縮放 */
-.logo img {
-  height: 32px;
 }
 
 /* 漢堡按鈕:清掉瀏覽器預設的灰底和邊框 */
@@ -40,6 +44,22 @@ body {
   cursor: pointer; /* 滑鼠移上去變手指 */
 }
 
+/* logo:限制高度,寬度自動等比例縮放 */
+.logo img {
+  height: 32px;
+}
+
+/* 文字選單:手機版藏起來,桌面版才顯示 */
+.nav {
+  display: none;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+}
+
 /* 右側 4 個 icon */
 .header__right {
   margin-left: auto; /* 吃掉左邊所有空白,把自己推到最右邊 */
@@ -47,9 +67,7 @@ body {
   gap: 16px; /* icon 之間的間距 */
 }
 
-/* ==============================
-   Banner
-   ============================== */
+/* ---------- 1-2. Banner ---------- */
 
 .banner img {
   width: 100%; /* 左右撐滿 */
@@ -57,28 +75,23 @@ body {
   object-fit: cover; /* 填滿框、不變形,多的部分裁掉 */
 }
 
-/* ==============================
-   訂票卡片
-   ============================== */
+/* ---------- 1-3. 訂票卡片外框 ---------- */
 
 .search-card {
   background-color: #fff;
   padding: 16px; /* 卡片內側留白 */
   border-radius: 8px; /* 圓角 */
   margin: 0 16px; /* 左右留白,卡片不貼邊 */
-  min-height: 200px; /* 最小高度(之後內容撐開後可以拿掉) */
+  min-height: 200px; /* 最小高度 */
 }
 
-/* ==============================
-   分頁(航班 / 樂虎卡 / 虎加酒 / 虎里轉)
-   ============================== */
+/* ---------- 1-4. 分頁(航班 / 樂虎卡 / 虎加酒 / 虎里轉) ---------- */
 
 .tabs {
   display: flex; /* 4 個分頁橫排 */
   gap: 20px;
 }
 
-/* 每個分頁:icon 和文字並排、去掉底線 */
 .tabs a {
   display: flex;
   align-items: center; /* icon 和文字垂直置中 */
@@ -88,21 +101,6 @@ body {
   padding-bottom: 8px; /* 讓底線和文字有距離 */
 }
 
-/* 方法二:用 ::after 偽元素畫底線(目前註解起來,拿來比較)
-.tabs__item--active {
-  position: relative;      // 讓 ::after 以它為定位參考
-}
-.tabs__item--active::after {
-  content: "";             // 偽元素一定要有 content
-  position: absolute;      // 相對於上面的 relative 定位
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 100%;
-  background: #ed7f01;
-}
-*/
-
 /* 選中的分頁:深色文字 + 橘色底線
    寫成 .tabs a.tabs__item--active 是為了提高權重(0-2-1),
    才能贏過上面的 .tabs a(0-1-1) */
@@ -111,10 +109,9 @@ body {
   border-bottom: 2px solid coral;
 }
 
-/* ==============================
-   來回 / 單程 下拉選單
-   ============================== */
+/* ---------- 1-5. 表單欄位(手機版:一個一個往下疊) ---------- */
 
+/* 來回 / 單程 下拉選單 */
 .trip-type {
   width: 100%;
   padding: 12px 16px;
@@ -122,14 +119,10 @@ body {
   border-radius: 4px;
   font-size: 16px;
   background: #fff; /* 明確指定白底,避免各瀏覽器預設不同 */
-  margin-top: 16px; /* 和上面的分頁拉開距離 */
+  margin-top: 16px; /* 和上面的元素拉開距離 */
 }
 
-/* ==============================
-   出發地 / 目的地(上下相連的一個大框)
-   ============================== */
-
-/* 外框由 .route 負責,裡面的 input 不畫自己的框 */
+/* 出發地 / 目的地:外框由 .route 負責,裡面的 input 不畫自己的框 */
 .route {
   margin-top: 16px;
   border: 1px solid #ccc;
@@ -150,10 +143,7 @@ body {
   border-bottom: 1px solid #ccc;
 }
 
-/* ==============================
-   日期欄位(跟 .route 同樣的概念)
-   ============================== */
-
+/* 日期欄位:跟 .route 同樣的概念 */
 .dates {
   margin-top: 16px;
   border: 1px solid #ccc;
@@ -178,13 +168,15 @@ body {
   border: none;
   font-size: 16px;
   width: 100%;
-  padding: 0;
+  padding: 0; /* 清掉瀏覽器預設 padding,才能和小字標題左對齊 */
 }
 
 /* 第一格下面畫分隔線 */
 .dates__item:first-child {
   border-bottom: 1px solid #ccc;
 }
+
+/* 旅客人數 */
 .passengers {
   display: block;
   margin-top: 16px;
@@ -192,12 +184,14 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .passengers__label {
   display: block;
   font-size: 12px;
   color: #666;
   margin-top: 3px;
 }
+
 .passengers__select {
   width: 100%;
   border: none;
@@ -205,12 +199,16 @@ body {
   font-size: 16px;
   background: #fff;
 }
+
+/* ---------- 1-6. 促銷代碼 + 搜尋按鈕 ---------- */
+
 .actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* 一個靠左、一個靠右 */
+  align-items: center; /* 上下置中 */
   margin-top: 16px;
 }
+
 .actions__promo {
   display: flex;
   align-items: center;
@@ -218,6 +216,7 @@ body {
   text-decoration: none;
   color: #827d7d;
 }
+
 .actions__search {
   background: #f0a840;
   color: #fff;
@@ -226,4 +225,145 @@ body {
   padding: 10px 24px;
   font-size: 16px;
   cursor: pointer;
+}
+
+/* ---------- 1-7. 快捷功能 ---------- */
+
+.shortcuts {
+  display: flex;
+  justify-content: space-around; /* 3 組平均分開 */
+  margin-top: 24px;
+  padding: 0 16px;
+}
+
+.shortcuts a {
+  display: flex;
+  flex-direction: column; /* 改成直排:icon 在上、文字在下 */
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+/* icon 畫成圓圈:寬高一樣 + border-radius: 50% */
+.shortcuts i {
+  display: flex; /* <i> 預設是行內元素,要改了寬高才會生效 */
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 3px solid #f0a840;
+  border-radius: 50%;
+  font-size: 28px;
+}
+.shortcuts a.shortcuts__desktop {
+  display: none;
+}
+
+/* =====================================================
+   2. 桌面版樣式(螢幕寬度 ≥ 1024px)
+   順序和上面一樣:由上到下
+   ===================================================== */
+
+@media (min-width: 1024px) {
+  /* ---------- 2-1. Header ---------- */
+
+  /* 內容限制最大寬度並置中 */
+  .header__inner {
+    max-width: 1200px;
+    margin: 0 auto; /* 上下 0、左右 auto = 水平置中 */
+    height: 72px;
+  }
+
+  /* 漢堡藏起來 */
+  .header__burger {
+    display: none;
+  }
+
+  /* 文字選單顯示出來 */
+  .nav {
+    display: flex;
+    gap: 24px;
+    margin-left: 24px;
+  }
+
+  /* ---------- 2-2. Banner ---------- */
+
+  .banner img {
+    height: 400px;
+  }
+
+  /* ---------- 2-3. 訂票卡片外框 ---------- */
+
+  .search-card {
+    max-width: 1200px;
+    margin: -40px auto 0; /* 上 -40px(往上疊到 banner)、左右置中、下 0 */
+    padding: 24px;
+    position: relative; /* 讓卡片浮在圖片上面,不被蓋住 */
+  }
+
+  /* ---------- 2-4. 表單欄位(桌面版:橫排) ---------- */
+
+  /* 4 個欄位的共同爸爸:橫排 */
+  .fields {
+    display: flex;
+    gap: 16px;
+    align-items: stretch; /* 4 個欄位高度拉到一樣 */
+    margin-top: 16px;
+  }
+
+  /* 橫排時,手機版的上方間距要清掉,否則會比別人低 */
+  .trip-type,
+  .route,
+  .dates,
+  .passengers {
+    margin-top: 0;
+  }
+
+  /* 每個欄位佔幾份寬度(數字是比例,不是 px) */
+  .trip-type {
+    flex: 1;
+  }
+
+  .passengers {
+    flex: 2;
+  }
+
+  /* 出發地 / 目的地:改成左右兩格 */
+  .route {
+    flex: 3;
+    display: flex; /* 裡面兩個 input 橫排 */
+  }
+
+  .route__input {
+    flex: 1; /* 兩格平分 */
+    min-width: 0; /* 允許縮小,不會被內容撐破 */
+  }
+
+  /* 分隔線換方向:從「下面」改成「右邊」 */
+  .route__input:first-child {
+    border-bottom: none;
+    border-right: 1px solid #ccc;
+  }
+
+  /* 日期:改成左右兩格 */
+  .dates {
+    flex: 3;
+    display: flex;
+  }
+
+  .dates__item {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dates__item:first-child {
+    border-bottom: none;
+    border-right: 1px solid #ccc;
+  }
+
+  .shortcuts a.shortcuts__desktop {
+    display: flex;
+  }
 }
