@@ -173,9 +173,14 @@ body {
 }
 
 /* label 預設是行內元素,改成 block 才會一格一行 */
+
 .dates__item {
   display: block;
   padding: 8px 16px;
+}
+
+.dates__item:first-child {
+  border-bottom: 1px solid #ccc;
 }
 
 /* 小字標題:獨佔一行,日期在它下面 */
