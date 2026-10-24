@@ -128,6 +128,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden; /* 裁掉 input 戳出來的方形角,圓角才看得到 */
+  position: relative;
 }
 
 .route__input {
@@ -141,6 +142,26 @@ body {
 /* 只在第一個 input 下面畫分隔線 */
 .route__input:first-child {
   border-bottom: 1px solid #ccc;
+}
+
+/* 對調出發地與目的地的按鈕 */
+
+.route__swap {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  left: auto;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* 日期欄位:跟 .route 同樣的概念 */
@@ -345,6 +366,12 @@ body {
   .route__input:first-child {
     border-bottom: none;
     border-right: 1px solid #ccc;
+  }
+
+  .route__swap {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
   }
 
   /* 日期:改成左右兩格 */

@@ -6,6 +6,7 @@
     <!-- 手機版能正常縮放的關鍵,一定要有 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>台灣虎航</title>
+    <script src="./booking.js" defer></script>
 
     <!-- CSS 載入順序很重要:後面的可以覆蓋前面的 -->
     <link rel="stylesheet" href="reset.css" />
@@ -94,6 +95,13 @@
               name="destination"
               placeholder="目的地"
             />
+            <button
+              type="button"
+              class="route__swap"
+              aria-label="對調出發地與目的地"
+            >
+              <i class="iconoir-arrow-separate-vertical"></i>
+            </button>
           </div>
 
           <!-- 日期欄位:label 把標題和 input 包在一起,
