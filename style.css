@@ -396,3 +396,11 @@ body {
     display: flex;
   }
 }
+
+.dates__input[type="date"] {
+  background-color: #fff;
+  color: #333;
+  opacity: 1;
+  -webkit-appearance: auto;
+  appearance: auto;
+}
