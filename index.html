@@ -106,18 +106,36 @@
 
           <!-- 日期欄位:label 把標題和 input 包在一起,
              點標題就會選到 input,所以不需要 for / id -->
+
           <div class="dates">
+            <!-- 去程出發日期 -->
             <label class="dates__item">
-              <!-- 欄位小標題用 span(行內),不用 p(label 裡不能放 p) -->
               <span class="dates__label">去程出發日期</span>
-              <!-- type="date" 瀏覽器會自動提供日曆選擇器 -->
-              <input class="dates__input" type="date" name="depart-date" />
+
+              <span class="dates__field">
+                <span class="dates__placeholder">____ / ____ / ____</span>
+
+                <input
+                  class="dates__input"
+                  type="date"
+                  name="depart-date"
+                  required
+                />
+              </span>
             </label>
+
+            <!-- 回程出發日期 -->
             <label class="dates__item">
               <span class="dates__label">回程出發日期</span>
-              <input class="dates__input" type="date" name="return-date" />
+
+              <span class="dates__field">
+                <span class="dates__placeholder">____ / ____ / ____</span>
+
+                <input class="dates__input" type="date" name="return-date" />
+              </span>
             </label>
           </div>
+
           <label class="passengers">
             <span class="passengers__label">旅客人數</span>
             <select class="passengers__select" name="passengers">
