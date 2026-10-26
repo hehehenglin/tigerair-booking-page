@@ -67,6 +67,15 @@ body {
   gap: 16px; /* icon 之間的間距 */
 }
 
+.header__right a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+}
+
 /* ---------- 1-2. Banner ---------- */
 
 .banner img {
@@ -417,4 +426,16 @@ body {
 
 .dates__item:first-child {
   border-bottom: 1px solid #999;
+}
+
+/* 手機版：只顯示 icon，隱藏文字 */
+.header__right a span {
+  display: none;
+}
+
+/* 電腦版：顯示 icon 和文字 */
+@media (min-width: 1024px) {
+  .header__right a span {
+    display: inline;
+  }
 }
